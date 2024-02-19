@@ -1,0 +1,14 @@
+name: 'Kubernetes Deploy'
+description: 'Deploy things to Kubernetes using a custom command'
+inputs:
+  command:
+    description: 'Command that should be executed'
+    required: true
+  working-directory:
+    description: 'Directory where the command should be executed'
+    default: "."
+runs:
+  using: 'docker'
+  image: 'docker://meisterplan/actions-k8s-deploy:master'
+  args:
+    - "cd ${{ inputs.working-directory }} && ${{ inputs.command }}"
